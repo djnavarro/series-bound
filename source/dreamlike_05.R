@@ -1,4 +1,4 @@
-seeds <- 1021:1099
+seeds <- 1400:1499
 
 pollinate <- function(seed) {
   
@@ -6,7 +6,7 @@ pollinate <- function(seed) {
   library(dplyr)
   library(cairobasic)
   
-  sys_id <- "01"
+  sys_id <- "05"
   sys_name <- "dreamlike"
   sourceCpp(here::here("source", paste0(sys_name, "_", sys_id, ".cpp")))
   
@@ -16,7 +16,7 @@ pollinate <- function(seed) {
   
   # fixed / default
   px <- 3000
-  layers <- 5
+  layers <- 3
   million <- 10^6
   iter <- 400 * million
   zoom <- .3
@@ -28,6 +28,7 @@ pollinate <- function(seed) {
   ncl <- 1024
   name <- sample(colorir::colores$palette_name, 1)
   pal <- colorir::colores$colour[colorir::colores$palette_name == name[1]]
+  pal <- sample(pal)
   bg <- pal[1] 
   pal <- (colorRampPalette(pal))(ncl)
   

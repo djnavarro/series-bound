@@ -1,4 +1,4 @@
-seeds <- 1021:1099
+seeds <- 2200:2299
 
 pollinate <- function(seed) {
   
@@ -6,7 +6,7 @@ pollinate <- function(seed) {
   library(dplyr)
   library(cairobasic)
   
-  sys_id <- "01"
+  sys_id <- "14"
   sys_name <- "dreamlike"
   sourceCpp(here::here("source", paste0(sys_name, "_", sys_id, ".cpp")))
   
@@ -18,26 +18,30 @@ pollinate <- function(seed) {
   px <- 3000
   layers <- 5
   million <- 10^6
-  iter <- 400 * million
-  zoom <- .3
-  alpha <- .5
+  iter <- 1000 * million
+  #zoom <- .4
+  alpha <- .01
   
   
   # palette specification ---------------------------------------------------
   
   ncl <- 1024
-  name <- sample(colorir::colores$palette_name, 1)
-  pal <- colorir::colores$colour[colorir::colores$palette_name == name[1]]
+  pal <- sample(colorir::colores$colour, 6)
   bg <- pal[1] 
   pal <- (colorRampPalette(pal))(ncl)
   
-  
+
+  # choose shape ------------------------------------------------------------
+  n_sides <- sample(c(4:8, 100), 1)
+  rot_off <- runif(1, 0, 120)
+  zoom <- runif(1, min = .35, max = .45)
+
   
   # helper functions --------------------------------------------------------
   
-  generate_data <- function(seed, iter, layers, px, zoom, alpha) {
+  generate_data <- function(seed, iter, layers, px, zoom, alpha, n_sides, rot_off) {
     set.seed(seed)
-    df <- raster_data(iter, layers, px, zoom, alpha)
+    df <- raster_data(iter, layers, px, zoom, alpha, n_sides, rot_off)
     return(df)
   }
   
@@ -84,7 +88,7 @@ pollinate <- function(seed) {
   cat("generating...\n")
   
   
-  df1 <- generate_data(seed, iter, layers, px, zoom, alpha)
+  df1 <- generate_data(seed, iter, layers, px, zoom, alpha, n_sides, rot_off)
   
   cat("transforming...\n")
   

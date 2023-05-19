@@ -1,4 +1,4 @@
-seeds <- 1021:1099
+seeds <- 1101
 
 pollinate <- function(seed) {
   
@@ -6,7 +6,7 @@ pollinate <- function(seed) {
   library(dplyr)
   library(cairobasic)
   
-  sys_id <- "01"
+  sys_id <- "02"
   sys_name <- "dreamlike"
   sourceCpp(here::here("source", paste0(sys_name, "_", sys_id, ".cpp")))
   
