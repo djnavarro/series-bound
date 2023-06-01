@@ -11,5 +11,6 @@ convert_file <- function(path, input_size, output_size) {
   cat(path, "\n")
 }
 
+
 images <- list.files(here::here("docs", "3000"))
 purrr::walk(images, ~convert_file(.x, 3000, 800))

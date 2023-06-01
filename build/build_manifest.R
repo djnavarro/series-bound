@@ -1,5 +1,7 @@
 library(magrittr)
 
+post_date <- "2023-06-02"
+
 paths <- here::here("docs") %>%
   list.files(recursive = TRUE) %>%
   stringr::str_subset("jpg$|png$")
@@ -22,8 +24,11 @@ manifest <- tibble::tibble(path = paths) %>%
     sep = "_"
   ) %>%
   dplyr::mutate(
+    #title = title %>%
+    #  stringr::str_replace_all("-", " ") %>%
+    #  stringr::str_to_title(),
     resolution = as.integer(resolution),
-    date = "2021-10-05"
+    date = post_date
   ) %>%
   dplyr::arrange(date, img_id)
 
